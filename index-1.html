@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7_ARTIST — Custom Art Studio</title>
+<style>
+:root{--ink:#171717;--muted:#777;--paper:#faf8f4;--line:#e8e3dc;--accent:#c56b45}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--paper);color:var(--ink)}
+header{background:#171717;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;gap:12px;position:sticky;top:0}
+.logo{font-size:25px;font-weight:900;letter-spacing:2px}.tag{font-size:10px;color:#d7c7bb;letter-spacing:2px}
+nav{display:flex;gap:16px;flex-wrap:wrap}nav a{color:white;text-decoration:none;font-size:13px}
+.hero{padding:58px 6%;background:linear-gradient(110deg,#211c19,#594236);color:white}
+.hero h1{font-size:clamp(36px,6vw,66px);margin:0 0 12px}.hero p{max-width:600px;line-height:1.6;color:#eee}
+.wrap{max-width:1100px;margin:auto;padding:28px 6%}.section-title{font-size:25px;margin:10px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:18px}
+.card h3{margin:8px 0}.art-icon{font-size:35px;background:#f3eee8;border-radius:10px;padding:18px}
+label{display:block;font-size:13px;font-weight:700;margin:13px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d9d2c9;border-radius:9px;background:white;font:inherit}
+textarea{min-height:90px;resize:vertical}
+button{background:var(--ink);color:white;border:0;padding:12px 18px;border-radius:9px;font-weight:700;cursor:pointer}
+button.secondary{background:#eee8e1;color:#222}button:disabled{opacity:.5;cursor:not-allowed}
+.formgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 14px}
+.notice{font-size:12px;color:var(--muted);line-height:1.5}.pill{display:inline-block;background:#f3e7df;color:#7c3d25;border-radius:99px;padding:6px 10px;font-size:12px}
+.preview{max-width:150px;max-height:150px;display:none;margin-top:10px;border-radius:8px;object-fit:cover}
+footer{padding:25px 6%;background:#171717;color:#ccc;text-align:center;font-size:12px}
+#admin{display:none}.order{border:1px solid var(--line);padding:12px;border-radius:10px;margin:10px 0;background:#fff}
+@media(max-width:600px){header{align-items:flex-start;flex-direction:column}.hero{padding:40px 6%}}
+</style></head>
+<body>
+<header><div><div class="logo">7_ARTIST</div><div class="tag">CUSTOM ART • MADE JUST FOR YOU</div></div><nav><a href="#categories">Art Categories</a><a href="#order">Place Order</a><a href="#owner">Owner Preview</a></nav></header>
+<section class="hero"><span class="pill">CUSTOM COMMISSION ART</span><h1>Your photo.<br>Your story. Your art.</h1><p>Choose your art medium, select a size, upload a reference photo and send your custom commission request to 7_ARTIST.</p><a href="#order"><button>Start Your Order</button></a></section>
+<main class="wrap">
+<section id="categories"><h2 class="section-title">Explore Art Categories</h2><div class="grid">
+<div class="card"><div class="art-icon">🖌️</div><h3>Oil Painting</h3><p class="notice">Custom oil painting commissions.</p></div>
+<div class="card"><div class="art-icon">🎨</div><h3>Acrylic Painting</h3><p class="notice">Colourful acrylic artwork.</p></div>
+<div class="card"><div class="art-icon">✏️</div><h3>Pencil Sketch</h3><p class="notice">Portrait and detailed sketches.</p></div>
+<div class="card"><div class="art-icon">🧱</div><h3>Wall Painting</h3><p class="notice">Custom wall-art requests.</p></div>
+</div></section>
+<section id="order" style="margin-top:38px"><h2 class="section-title">Place a Custom Art Order</h2><div class="panel">
+<form id="orderForm">
+<div class="formgrid">
+<div><label>Full Name *</label><input name="name" required placeholder="Your full name"></div>
+<div><label>Phone Number *</label><input name="phone" required inputmode="tel" placeholder="10-digit mobile number"></div>
+<div><label>Email *</label><input name="email" required type="email" placeholder="you@example.com"></div>
+<div><label>City *</label><input name="city" required placeholder="City"></div>
+<div><label>PIN Code *</label><input name="pin" required inputmode="numeric" placeholder="PIN code"></div>
+<div><label>Delivery Address *</label><input name="address" required placeholder="House, street, area"></div>
+<div><label>Art Medium *</label><select name="medium" required><option value="">Choose medium</option><option>Oil Painting</option><option>Acrylic Painting</option><option>Pencil Sketch</option><option>Wall Painting</option></select></div>
+<div><label>Size *</label><select id="size" name="size" required><option value="">Choose size</option><option>A4</option><option>A3</option><option>Custom Size</option></select></div>
+<div id="customDims" style="display:none"><label>Custom Height × Length</label><input name="dimensions" placeholder="e.g. 12 × 18 inches"></div>
+<div><label>Payment Method *</label><select name="payment" required><option value="">Choose payment</option><option>UPI — full payment</option><option>UPI — 30% advance</option><option>Cash on Delivery — 30% advance required</option></select></div>
+</div>
+<label>Upload reference photo *</label><input id="photo" type="file" accept="image/*" required><img id="photoPreview" class="preview" alt="Photo preview">
+<label>Describe the artwork you want</label><textarea name="instructions" placeholder="Tell us about the pose, background, colours or any special details..."></textarea>
+<p class="notice">Payment note: COD orders require 30% advance; remaining 70% is due on delivery. Final price and advance amount will be confirmed by the artist before payment. This demo does not collect payments or transmit uploaded files.</p>
+<button type="submit">Preview Order</button>
+</form><div id="confirmation" class="notice" aria-live="polite"></div></div></section>
+<section id="owner" style="margin-top:38px"><h2 class="section-title">Owner Preview</h2><div class="panel"><p class="notice">This is a local design preview only. The secure owner dashboard is not active yet. In the live website, only the owner account should be able to view customer orders and private uploaded photos.</p><label>Demo owner passcode</label><input id="demoPass" type="password" placeholder="Enter demo passcode"><button id="showAdmin" style="margin-top:10px">Open demo dashboard</button><div id="admin"><h3>Demo Admin Dashboard</h3><p class="notice">Preview submissions on this device only:</p><div id="orders"></div></div></div></section>
+</main><footer>© 2026 7_ARTIST · Custom art made with care</footer>
+<script>
+const size=document.getElementById('size'),dims=document.getElementById('customDims');
+size.addEventListener('change',()=>dims.style.display=size.value==='Custom Size'?'block':'none');
+const photo=document.getElementById('photo'),img=document.getElementById('photoPreview');
+photo.addEventListener('change',()=>{const f=photo.files[0];if(f){img.src=URL.createObjectURL(f);img.style.display='block'}});
+let saved=[];
+document.getElementById('orderForm').addEventListener('submit',e=>{
+ e.preventDefault();const data=Object.fromEntries(new FormData(e.target).entries());
+ data.photoName=photo.files[0]?.name||'No photo';saved.push(data);
+ document.getElementById('confirmation').textContent='Order preview created on this device. No order has been sent and no payment has been taken.';
+ e.target.reset();img.style.display='none';dims.style.display='none';
+});
+document.getElementById('showAdmin').addEventListener('click',()=>{
+ if(document.getElementById('demoPass').value!=='7artist-demo'){alert('For this visual demo, enter: 7artist-demo');return}
+ document.getElementById('admin').style.display='block';
+ document.getElementById('orders').innerHTML=saved.length?saved.map((o,i)=>`<div class="order"><b>Demo Order ${i+1}: ${escapeHtml(o.name)}</b><br>${escapeHtml(o.medium)} · ${escapeHtml(o.size)} · ${escapeHtml(o.payment)}<br>${escapeHtml(o.city)}, ${escapeHtml(o.pin)}<br><span class="notice">Photo filename: ${escapeHtml(o.photoName)}</span></div>`).join(''):'No demo orders yet.';
+});
+function escapeHtml(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+</script></body></html>
